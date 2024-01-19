@@ -1,0 +1,186 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>Update Patient</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" routerLink="/Home" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i>
+              &nbsp;Back</a>
+          </div>
+        </div>
+      </div>
+      <form #patientForm="ngForm">
+        <div class="table-content">
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="FirstName" class="p-t-b-10">First Name<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="FirstName" required maxlength="255"
+                     [(ngModel)]="addPatientForm.firstName" name="firstName" #firstName="ngModel">
+              <div *ngIf="firstName.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!firstName.errors?.['required']">
+                  First Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">Last Name<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="LastName" required maxlength="255"
+                     [(ngModel)]="addPatientForm.lastName" name="lastName" #lastName="ngModel">
+              <div *ngIf="lastName.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!lastName.errors?.['required']">
+                  Last Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Gender<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-2">
+              <ng-select [items]="genderList"
+                         bindLabel="name"
+                         bindValue="id"
+                         id="gender"
+                         name="gender"
+                         placeholder="select gender"
+                         #gender="ngModel"
+                         [(ngModel)]="addPatientForm.gender">
+              </ng-select>
+              <div *ngIf="gender.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!gender.errors?.['required']">
+                  Gender is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Day Of Birth<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-5">
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="dayOfBirth"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                  #dayOfBirth="ngModel"
+                  [(ngModel)]="addPatientForm.dayOfBirth"
+                />
+                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+                <div *ngIf="dayOfBirth.errors && isSubmitted" class="alert alert-danger validationError">
+                  <div [hidden]="!dayOfBirth.errors?.['required']">
+                    Last Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Address<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="address" required [(ngModel)]="addPatientForm.address" name="address"
+                        #address="ngModel">></textarea>
+              <div *ngIf="address.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!address.errors?.['required']">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Suburb<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-3">
+              <!--              <input class="form-control" id="suburb" required [(ngModel)]="addPatientForm.suburb" name="suburb"-->
+              <!--                        #suburb="ngModel">-->
+              <ng-select [items]="suburbList"
+                         bindLabel="name"
+                         bindValue="id"
+                         id="suburb"
+                         name="suburb"
+                         placeholder="select suburb"
+                         #suburb="ngModel"
+                         [(ngModel)]="addPatientForm.suburbId">
+              </ng-select>
+              <div *ngIf="suburb.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!suburb.errors?.['required']">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">State<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-3">
+              <ng-select [items]="stateList"
+                         bindLabel="name"
+                         bindValue="id"
+                         id="state"
+                         name="state"
+                         placeholder="select state"
+                         #state="ngModel"
+                         [(ngModel)]="addPatientForm.stateId">
+              </ng-select>
+              <div *ngIf="state.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!state.errors?.['required']">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Post Code<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input class="form-control" id="postCode" required [(ngModel)]="addPatientForm.postCode" name="postCode"
+                     #postCode="ngModel">
+              <div *ngIf="postCode.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!postCode.errors?.['required']">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Phone Number<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="phoneNumber" required maxlength="10"
+                     [(ngModel)]="addPatientForm.phoneNumber" name="phoneNumber" #phoneNumber="ngModel">
+              <div *ngIf="phoneNumber.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!phoneNumber.errors?.['required']">
+                  Phone is required
+                </div>
+                <div [hidden]="!phoneNumber.errors?.['touched'] && !phoneNumber.errors?.['pattern']">
+                  Phone is invalid
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-footer">
+          <button class="btn btn-success" (click)="updatePatient(patientForm.form.valid)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
