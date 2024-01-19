@@ -1,0 +1,79 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>Calculate Average Number Of Death</b></h4>
+          </div>
+        </div>
+      </div>
+      <form #victimForm="ngForm">
+        <div class="table-content">
+          <div class="form-group p-10 row">
+            <div class="col-sm-2">
+              Villager 1 :
+            </div>
+            <div class="col-sm-2">
+              <label for="firstVictimAgeOfDeath" class="p-t-b-10">Age Of Death<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="firstVictimAgeOfDeath" required maxlength="255"
+                     name="firstVictimAgeOfDeath" [(ngModel)]="form.firstVictimAgeAtDeath"
+                     #firstVictimAgeOfDeath="ngModel">
+              <div *ngIf="firstVictimAgeOfDeath.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!firstVictimAgeOfDeath.errors?.['required']">
+                  First Victim Age At Death Is Required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <label for="firstVictimYearOfDeath" class="p-t-b-10">Year Of Death<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="firstVictimYearOfDeath" required maxlength="255"
+                     [(ngModel)]="form.firstVictimYearOfDeath" name="firstVictimYearOfDeath" #firstVictimYearOfDeath="ngModel">
+              <div *ngIf="firstVictimYearOfDeath.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!firstVictimYearOfDeath.errors?.['required']">
+                  First Victim Year Of Death Is Required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-2">
+              Villager 2 :
+            </div>
+            <div class="col-sm-2">
+              <label for="secondVictimAgeAtDeath" class="p-t-b-10">Age Of Death<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="secondVictimAgeAtDeath" required maxlength="255"
+                     [(ngModel)]="form.secondVictimAgeAtDeath" name="secondVictimAgeAtDeath" #secondVictimAgeAtDeath="ngModel">
+              <div *ngIf="secondVictimAgeAtDeath.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!secondVictimAgeAtDeath.errors?.['required']">
+                  Second Victim Age At Death Is Required
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <label for="secondVictimYearOfDeath" class="p-t-b-10">Year Of Death<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="secondVictimYearOfDeath" required maxlength="255"
+                     [(ngModel)]="form.secondVictimYearOfDeath" name="secondVictimYearOfDeath" #secondVictimYearOfDeath="ngModel">
+              <div *ngIf="secondVictimYearOfDeath.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!secondVictimYearOfDeath.errors?.['required']">
+                  Second Victim Year Of Death Is Required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-footer">
+          <button class="btn btn-success" (click)="calculate(victimForm.form.valid)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
