@@ -4,8 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AddPatientComponent } from './add-patient/add-patient.component';
-import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {NgbDatepickerModule, NgbModule, NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
@@ -18,8 +16,6 @@ import {NgxPaginationModule} from "ngx-pagination";
   declarations: [
     AppComponent,
     HomeComponent,
-    AddPatientComponent,
-    EditPatientComponent,
   ],
   imports: [
     BrowserModule,
