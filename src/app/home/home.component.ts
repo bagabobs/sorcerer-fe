@@ -2,28 +2,35 @@ import {Component, Input, OnInit, Type, ViewChild} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map} from "rxjs";
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'ng-modal-confirm',
   template: `
-  <div class="modal-header">
-    <h5 class="modal-title" id="modal-title">Calculation Result</h5>
-    <button type="button" class="btn close" aria-label="Close button" aria-describedby="modal-title" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure you wa</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" ngbAutofocus class="btn btn-success" (click)="modal.close('Ok click')">OK</button>
-  </div>
+    <div class="modal-header">
+      <h5 class="modal-title" id="modal-title">Calculation Result</h5>
+      <button type="button" class="btn close" aria-label="Close button" aria-describedby="modal-title"
+              (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Calculation Result from the problem is {{calculateResult?.avgYearOfDeath}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" ngbAutofocus class="btn btn-success" (click)="modal.close('Ok click')">OK</button>
+    </div>
   `,
+  standalone: true
 })
-
-export class NgModalConfirm {
+export class NgModalConfirm implements OnInit {
+  @Input()
+  public calculateResult: any = null;
   constructor(public modal: NgbActiveModal) { }
+
+  ngOnInit(): void {
+    console.log(this.calculateResult);
+  }
 }
 
 const MODALS: { [name: string]: Type<any> } = {
@@ -43,7 +50,7 @@ export class HomeComponent implements OnInit {
   @ViewChild("victimForm")
   victimForm!: NgForm;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private modalService: NgbModal) {}
 
   ngOnInit(): void {
   }
@@ -65,12 +72,13 @@ export class HomeComponent implements OnInit {
         }),
         observe: "response" as 'body'
       };
-      this.httpClient.post(
+      const data = this.httpClient.post(
         "http://localhost:8080/api/village/calculateaverage",
         value,
         httpOptions)
         .subscribe(async (data: any)=> {
-          console.log('data', data.body);
+          const modalRef = this.modalService.open(NgModalConfirm);
+          modalRef.componentInstance.calculateResult = data.body;
         });
     }
   }
